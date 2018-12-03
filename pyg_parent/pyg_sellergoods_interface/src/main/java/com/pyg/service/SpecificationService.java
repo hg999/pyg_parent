@@ -1,5 +1,7 @@
 package com.pyg.service;
 import java.util.List;
+import java.util.Map;
+
 import com.pyg.pojo.TbSpecification;
 
 import com.pyg.pojogroup.Specification;
@@ -63,5 +65,7 @@ public interface SpecificationService {
 	 * @return
 	 */
 	public Specification findOne(Long id);
+
+	public List<Map> selectOptionList();
 	
 }

@@ -1,5 +1,6 @@
 package com.pyg.service.impl;
 import java.util.List;
+import java.util.Map;
 
 import com.pyg.mapper.TbSpecificationOptionMapper;
 import com.pyg.pojo.TbSpecificationOption;
@@ -95,6 +96,11 @@ public class SpecificationServiceImpl implements SpecificationService {
 		spec.setSpecification(tbSpecification);
 		spec.setSpecificationOptionList(optionList);
 		return spec;
+	}
+
+	@Override
+	public List<Map> selectOptionList() {
+		return specificationMapper.selectOptionList();
 	}
 
 	/**
