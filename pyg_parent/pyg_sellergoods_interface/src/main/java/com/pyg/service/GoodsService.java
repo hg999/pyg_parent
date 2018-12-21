@@ -2,6 +2,8 @@ package com.pyg.service;
 import java.util.List;
 import com.pyg.pojo.TbGoods;
 
+import com.pyg.pojo.TbItem;
+import com.pyg.pojogroup.Goods;
 import entity.PageResult;
 /**
  * 服务层接口
@@ -24,16 +26,13 @@ public interface GoodsService {
 	public PageResult findPage(int pageNum, int pageSize);
 	
 	
-	/**
-	 * 增加
-	*/
-	public void add(TbGoods goods);
+
 	
 	
 	/**
 	 * 修改
 	 */
-	public void update(TbGoods goods);
+	public void update(Goods goods);
 	
 
 	/**
@@ -41,7 +40,7 @@ public interface GoodsService {
 	 * @param id
 	 * @return
 	 */
-	public TbGoods findOne(Long id);
+	public Goods findOne(Long id);
 	
 	
 	/**
@@ -57,5 +56,25 @@ public interface GoodsService {
 	 * @return
 	 */
 	public PageResult findPage(TbGoods goods, int pageNum, int pageSize);
-	
+
+	/**
+	 * 增加
+	 * @param goods
+	 */
+	public void add(Goods goods);
+
+	/**
+	 * 批量修改状态
+	 * @param ids
+	 * @param status
+	 */
+	public void updateStatus(Long []ids,String status);
+
+	/**
+	 *根据商品ID和状态查询Item表信息
+	 *@param goodsId
+	 *@param status
+	 *@return  */
+	public List<TbItem> findItemListByGoodsIdAndStatus(Long[] goodsIds, String status );
+
 }

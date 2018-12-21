@@ -9,15 +9,15 @@
     <link rel="stylesheet" type="text/css" href="css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="css/pages-register.css" />
 
-	<script type="text/javascript" src="plugins/angularjs/angular.min.js">  </script>
-	<script type="text/javascript" src="js/base.js">  </script>
-	<script type="text/javascript" src="js/service/sellerService.js">  </script>
-	<script type="text/javascript" src="js/controller/baseController.js">  </script>
-	<script type="text/javascript" src="js/controller/sellerController.js">  </script>
+	<script type="text/javascript" src="plugins/angularjs/angular.min.js"> </script>
+	<script type="text/javascript" src="js/base.js"> </script>
+	<script type="text/javascript" src="js/service/sellerService.js"> </script>
+	<script type="text/javascript" src="js/controller/baseController.js"> </script>
+	<script type="text/javascript" src="js/controller/sellerController.js"> </script>
 </head>
 
-<body>
-	<div class="register py-container " ng-app="pyg" ng-controller="sellerController">
+<body ng-app="pyg" ng-controller="sellerController">
+	<div class="register py-container ">
 		<!--head-->
 		<div class="logoArea">
 			<a href="" class="logo"></a>
@@ -31,14 +31,14 @@
 					<div class="control-group">
 						<label class="control-label">登陆名（不可修改）：</label>
 						<div class="controls">
-							<input type="text" ng-model="entity.sellerId" placeholder="登陆名" class="input-xfat input-xlarge">
+							<input type="text" placeholder="登陆名" ng-model="entity.sellerId"  class="input-xfat input-xlarge">
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label">登陆密码：</label>
 						<div class="controls">
-							<input type="password" ng-model="entity.password" placeholder="登陆密码" class="input-xfat input-xlarge">
+							<input type="password" placeholder="登陆密码" ng-model="entity.password"  class="input-xfat input-xlarge">
 						</div>
 					</div>
 				
@@ -163,7 +163,7 @@
 					<div class="control-group">
 						<label class="control-label"></label>
 						<div class="controls btn-reg">
-							<a class="sui-btn btn-block btn-xlarge btn-danger" ng-click="add()" target="_blank">申请入驻</a>
+							<a class="sui-btn btn-block btn-xlarge btn-danger" ng-click="add()" >申请入驻</a>
 						</div>
 					</div>
 				</form>

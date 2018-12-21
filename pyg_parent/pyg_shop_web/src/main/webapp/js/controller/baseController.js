@@ -1,48 +1,56 @@
-app.controller('baseController', function ($scope) {
-
-    //分页控件配置
-    // <tm-pagination conf="paginationConf"></tm-pagination> 视图改变的时候paginationConf数据模型改变
-    // 同时出发onChange方法的调用，这个时机可以向服务器请求分页数据
-    $scope.paginationConf = {
-        currentPage: 1,
-        totalItems: 10,
-        itemsPerPage: 10,
-        perPageOptions: [10, 20, 30, 40, 50],
-        onChange: function(){
-            $scope.reloadList();//重新加载
-        }
-    };
-
-    $scope.reloadList=function () {
-        //$scope.findPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
-        $scope.search($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
+ //品牌控制层 
+app.controller('baseController' ,function($scope){	
+	
+    //重新加载列表 数据
+    $scope.reloadList=function(){
+    	//切换页码  
+    	$scope.search( $scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);	   	
     }
+    
+	//分页控件配置 
+	$scope.paginationConf = {
+         currentPage: 1,
+         totalItems: 10,
+         itemsPerPage: 10,
+         perPageOptions: [10, 20, 30, 40, 50],
+         onChange: function(){
+        	 $scope.reloadList();//重新加载
+     	 }
+	}; 
+	
+	$scope.selectIds=[];//选中的ID集合 
 
-    //checkbox选中之后当前id存放到这个集合
-    $scope.selectIds = [];
-    $scope.updateSelections=function ($event, id) {
-        //如果当前点击的checkbox选中状态,把id加入到集合
-        if($event.target.checked) {
-            $scope.selectIds.push(id);
-        } else {
-            //如果当前点击的checkbox取消状态，从集合移除，需要找到当前id在结合的位置
-            var idIndex = $scope.selectIds.indexOf(id);
-            $scope.selectIds.splice(idIndex, 1);
-        }
-    }
+	//更新复选
+	$scope.updateSelection = function($event, id) {		
+		if($event.target.checked){//如果是被选中,则增加到数组
+			$scope.selectIds.push( id);			
+		}else{
+			var idx = $scope.selectIds.indexOf(id);
+            $scope.selectIds.splice(idx, 1);//删除 
+		}
+	}
 
-    $scope.jsonToStr=function (jsonStr, key) {
-
-        jsonStr = JSON.parse(jsonStr);
-        var str = "";
-        for (var i=0;i<jsonStr.length;i++) {
-            if(i>0) {
-                str+=", ";
+    //提取json字符串数据中某个属性，返回拼接字符串 逗号分隔
+    $scope.jsonToString=function(jsonString,key){
+        var json=JSON.parse(jsonString);//将json字符串转换为json对象
+        var value="";
+        for(var i=0;i<json.length;i++){
+            if(i>0){
+                value+=","
             }
-            str+=jsonStr[i][key];
+            value+=json[i][key];
         }
-        return str;
+        return value;
     }
 
-
-});
+    //从集合中按照key查询对象
+    $scope.searchObjectByKey=function(list,key,keyValue){
+        for(var i=0;i<list.length;i++){
+            if(list[i][key]==keyValue){
+                return list[i];
+            }
+        }
+        return null;
+    }
+	
+});	

@@ -15,6 +15,25 @@
         <module>pyg_sellergoods_service</module>
         <module>pyg_manager_web</module>
         <module>pyg_shop_web</module>
+        <module>pyg_common</module>
+        <module>pyg_content_interface</module>
+        <module>pyg_content_service</module>
+        <module>pyg_portal_web</module>
+        <module>pyg_search_service</module>
+        <module>pyg_search_interface</module>
+        <module>pyg_search_web</module>
+        <module>pyg_page_interface</module>
+        <module>pyg_page_service</module>
+        <module>pyg_user_interface</module>
+        <module>pyg_user_service</module>
+        <module>pyg_user_web</module>
+        <module>com_hg_sms</module>
+        <module>pyg_cart_interface</module>
+        <module>pyg_cart_service</module>
+        <module>pyg_cart_web</module>
+        <module>pyg_page_web</module>
+        <module>pyg_order_interface</module>
+        <module>pyg_order_service</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->
@@ -444,6 +463,21 @@
         <dependency>
             <groupId>xml-apis</groupId>
             <artifactId>xml-apis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.23</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+            <version>5.13.4</version>
         </dependency>
     </dependencies>
 

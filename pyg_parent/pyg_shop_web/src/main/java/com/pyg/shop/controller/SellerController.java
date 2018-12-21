@@ -50,11 +50,12 @@ public class SellerController {
 	 */
 	@RequestMapping("/add")
 	public Result add(@RequestBody TbSeller seller){
+		//密码加密
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String password = passwordEncoder.encode(seller.getPassword());
+		seller.setPassword(password);
 		try {
-			//密码加密
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String password = passwordEncoder.encode(seller.getPassword());
-			seller.setPassword(password);
+			sellerService.add(seller);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
 			e.printStackTrace();

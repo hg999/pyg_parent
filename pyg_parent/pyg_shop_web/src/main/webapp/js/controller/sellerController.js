@@ -2,15 +2,6 @@
 app.controller('sellerController' ,function($scope,$controller   ,sellerService){	
 	
 	$controller('baseController',{$scope:$scope});//继承
-
-	$scope.getSellerId=function () {
-
-        sellerService.getSellerId().success(function (response) {
-
-			$scope.sellerId=JSON.parse(response);
-        });
-    }
-
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
@@ -41,16 +32,37 @@ app.controller('sellerController' ,function($scope,$controller   ,sellerService)
 	}
 	
 	//保存 
-	$scope.save=function(){
-        sellerService.add( $scope.entity  ).success(function (response) {
-
-            if(response.success) {
-				location.href="shoplogin.html";
-			} else {
-				alert(response.message);
-			}
-        });
+	$scope.save=function(){				
+		var serviceObject;//服务层对象  				
+		if($scope.entity.id!=null){//如果有ID
+			serviceObject=sellerService.update( $scope.entity ); //修改  
+		}else{
+			serviceObject=sellerService.add( $scope.entity  );//增加 
+		}				
+		serviceObject.success(
+			function(response){
+				if(response.success){
+					//重新查询 
+		        	$scope.reloadList();//重新加载
+				}else{
+					alert(response.message);
+				}
+			}		
+		);				
 	}
+
+    //保存
+    $scope.add=function() {
+        sellerService.add($scope.entity).success(
+            function (response) {
+                if (response.success) {
+                    location.href = 'shoplogin.html';
+                } else {
+                    alert(response.message);
+                }
+            }
+        );
+    }
 	
 	 
 	//批量删除 
@@ -77,5 +89,18 @@ app.controller('sellerController' ,function($scope,$controller   ,sellerService)
 			}			
 		);
 	}
+
+    //修改
+    $scope.updateStatus=function(sellerId,status){
+        sellerService.updateStatus(sellerId,status).success(
+            function(response){
+                if(response.success){
+                    $scope.reloadList();//刷新列表
+                }else{
+                    alert("失败");
+                }
+            }
+        );
+    }
     
 });	
